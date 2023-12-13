@@ -20,16 +20,50 @@ const questions = document.querySelectorAll(".question");
 const answers = document.querySelectorAll(".answer");
 const iconArrow = document.querySelectorAll(".fa-angle-down");
 
-for (let questionIndex = 0; questionIndex < questions.length; questionIndex++) {
-  questions[questionIndex].addEventListener("click", function () {
-    for (let i = 0; i < questions.length; i++) {
-      if (i !== questionIndex) {
-        answers[i].classList.add("hidden");
-        iconArrow[i].classList.remove("arrow-rotate");
+for (let i = 0; i < questions.length; i++) {
+  questions[i].addEventListener("click", function () {
+    for (let j = 0; j < questions.length; j++) {
+      if (j !== i) {
+        answers[j].classList.add("hidden");
+        iconArrow[j].classList.remove("arrow-rotate");
       }
     }
 
-    answers[questionIndex].classList.toggle("hidden");
-    iconArrow[questionIndex].classList.toggle("arrow-rotate");
+    answers[i].classList.toggle("hidden");
+    iconArrow[i].classList.toggle("arrow-rotate");
+  });
+}
+
+const navbar = document.querySelector(".navbar");
+const mobileLogo = document.querySelector(".mobile-logo");
+const iconClose = document.querySelector(".icon-close");
+const iconHamburger = document.querySelector(".icon-hamburger");
+const navList = document.querySelectorAll(".nav-list");
+
+function openCloseNavbar(state) {
+  if (state === true) {
+    navbar.style.display = "flex";
+    iconClose.classList.add("block");
+    mobileLogo.classList.add("block");
+    document.body.style.overflow = "hidden";
+  } else {
+    navbar.style.display = "none";
+    iconClose.classList.remove("block");
+    mobileLogo.classList.remove("block");
+    document.body.style.overflow = "scroll";
+  }
+}
+
+iconHamburger.addEventListener("click", function () {
+  openCloseNavbar(true);
+});
+
+iconClose.addEventListener("click", function () {
+  openCloseNavbar(false);
+});
+
+for (let i = 0; i < navList.length; i++) {
+  navList[i].addEventListener("click", function () {
+    openCloseNavbar(false);
   });
 }
